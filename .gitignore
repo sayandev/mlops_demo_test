@@ -1,0 +1,121 @@
+# Data files and datasets
+*.csv
+*.tsv
+*.json
+*.jsonl
+*.parquet
+*.avro
+*.orc
+*.xlsx
+*.xls
+*.h5
+*.hdf5
+*.pickle
+*.pkl
+*.npy
+*.npz
+*.mat
+
+# Large compressed files
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.rar
+*.7z
+*.gz
+*.bz2
+
+# Model artifacts and weights
+*.joblib
+*.model
+*.h5
+*.pb
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+*.tflite
+*.mlmodel
+
+# MLflow artifacts
+mlflow_data/
+mlruns/
+mlflow.db
+*.db
+
+# Ray results and logs
+ray_results/
+logs/
+*.log
+
+# Training artifacts
+artifacts/
+checkpoints/
+wandb/
+tensorboard_logs/
+runs/
+
+# Cache directories
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Docker volumes and data
+docker-compose.override.yml
+.docker/
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Exception: Keep sample/demo data files
+
+
+# Exception: Keep small config data files under 1MB
+# !config/**/*.json
+# !config/**/*.yaml
+# !config/**/*.yml

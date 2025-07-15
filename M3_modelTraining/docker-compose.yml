@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+
+  mlflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.mlflow
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./mlflow_data:/app/mlflow
+      - ./artifacts:/artifacts
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=sqlite:///mlflow/mlflow.db
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/artifacts
+
+  trainer:
+    build: .
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5050
+    depends_on:
+      - mlflow
+    command: tail -f /dev/null
+
+  # ray-head:
+  #   image: rayproject/ray:latest
+  #   ports:
+  #     - "8265:8265"
+  #     - "10001:10001"
+  #   volumes:
+  #     - ./ray_results:/ray_results
+  #   command: >
+  #     bash -c "ray start --head --dashboard-host=0.0.0.0 --dashboard-port=8265 &&
+  #              sleep infinity"
+  ray-head:
+    image: rayproject/ray:latest
+    ports:
+      - "8265:8265"
+      - "10001:10001"
+    volumes:
+      - ./ray_results:/ray_results
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./tune_ray.py:/app/tune_ray.py
+      - ./requirements.txt:/app/requirements.txt
+    working_dir: /app
+    command: >
+      bash -c "pip install -r requirements.txt &&
+               ray start --head --dashboard-host=0.0.0.0 --dashboard-port=8265 &&
+               sleep infinity"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app
+      - RAY_WORKER_REGISTER_TIMEOUT_SECONDS=60
+      - RAY_PICKLE_VERBOSE_DEBUG=1
+      - RAY_FORCE_ENVIRONMENT_VARIABLES_FOR_WORKER=1
+      - PATH=/home/ray/anaconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - CONDA_DEFAULT_ENV=base
+      - RAY_PYTHON_EXECUTABLE=/home/ray/anaconda3/bin/python
+
+volumes:
+  mlflow_data:
+  artifacts:

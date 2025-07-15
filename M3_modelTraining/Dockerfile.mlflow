@@ -1,0 +1,8 @@
+FROM python:3.9-slim
+
+RUN pip install mlflow boto3
+
+WORKDIR /app
+
+CMD ["mlflow", "server", "--backend-store-uri=sqlite:///mlflow/mlflow.db", "--default-artifact-root=/artifacts", "--host=0.0.0.0", "--port=5050"]
+

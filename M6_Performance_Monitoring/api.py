@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import joblib, os, glob, pandas as pd
+import json
 from inference_utils import FraudModelPreprocessor
 from monitoring_data_logger import append_input
 from fastapi.responses import FileResponse, JSONResponse

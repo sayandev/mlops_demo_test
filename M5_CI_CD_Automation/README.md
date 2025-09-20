@@ -1,6 +1,6 @@
 # 🚦 M5_CI_CD_Automation: Fraud Detection ML Pipeline with CI/CD
 
-A robust, open-source pipeline for fraud detection using the IEEE-CIS Kaggle dataset, complete with automated data ingestion, model training with MLflow tracking, a FastAPI deployment, and GitHub Actions-based CI/CD workflow.
+Test A robust, open-source pipeline for fraud detection using the IEEE-CIS Kaggle dataset, complete with automated data ingestion, model training with MLflow tracking, a FastAPI deployment, and GitHub Actions-based CI/CD workflow.
 
 ---
 
